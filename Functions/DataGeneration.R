@@ -1,4 +1,13 @@
-generateU = function(k = k, n = n) {
+####
+
+# Megan Tung
+# File contains helper functions to generate matrices given combination of parameters
+# INTEGER k, INTEGER n, INTEGER p, INTEGER s to return MATRICES U, V, D, errorMat in LIST
+
+####
+
+
+generateU = function(k, n) {
   # generating U - n*k
   # superfeatures
   # gets a random normal matrix
@@ -9,7 +18,7 @@ generateU = function(k = k, n = n) {
   
   return(U)
 }
-generateV = function(k = k, p = p, s = s) {
+generateV = function(k, p, s) {
   # generating v - p*k - coefficients
   
   N = matrix(rnorm(k * s), s, k) # non-zero submatrix
@@ -21,7 +30,7 @@ generateV = function(k = k, p = p, s = s) {
   return(V)
 }
 
-generateD = function(k = k) {
+generateD = function(k) {
   # generating D - k*k 
   # determines signal strength
   
@@ -36,7 +45,7 @@ generateD = function(k = k) {
   return(D)
 }
 
-generateError = function(sd = error.sd, n = 210, p = 48) {
+generateError = function(sd, n = 210, p = 48) {
   # generating error/noise matrix - n*p
   
   errorMat = matrix(rnorm(n * p, mean = 0, sd = sd), nrow = n, ncol = p)
@@ -44,13 +53,13 @@ generateError = function(sd = error.sd, n = 210, p = 48) {
   return(errorMat)
 }
 
-generateSettings = function(k = k, error.sd = error.sd, s = sparse, n = 210, p = 48) {
+generateSettings = function(k, errorSD, s, n = 210, p = 48) {
   # generating all matrices
   
   U = generateU(k = k, n = n)
   V = generateV(k = k, p = p, s = s)
   D = generateD(k = k)
-  errorMat = generateError(sd = error.sd, n = n, p = p)
+  errorMat = generateError(sd = errorSD, n = n, p = p)
   X = (U %*% D %*% t(V)) + errorMat
   
   return(list(X = X, U = U, V = V, D = D, E = errorMat))

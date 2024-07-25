@@ -1,13 +1,13 @@
 #####
 
-# FORMAT:
-# input: MATRIX: X, INTEGER: k (exception nBartlett)
-# output: LIST: loadings = loadings matrix, scores = scores matrix
+# Megan Tung
+# File contains helper functions to apply PCA methods given MATRIX X and INTEGER 
+# k and output results in usable LIST format. Exception is selectK that takes in 
+# MATRIX X to output INTEGER k 
 
 ######
 
-#loading required packages & sourcing files
-
+# loading required packages & sourcing files
 library(nFactors)
 library(sparsepca)
 library(ltsspca)
@@ -15,7 +15,7 @@ library(BiocManager)
 library(pcaMethods)
 
 ## method: nBartlett
-selectK = function(X = data.matrix) {
+selectK = function(X) {
   # assign correlation variable
   corX = cor(X)
   
@@ -23,7 +23,7 @@ selectK = function(X = data.matrix) {
   values = eigen(corX)$values
   if (min(values) < 0) {
     # make adjustment so eigenvalues are non-negative
-    # Create new corX = 0.99 corX + 0.01 I
+    # create new corX = 0.99 corX + 0.01 I
     corX = 0.999 * corX + 0.001 * diag(ncol(corX))
   }
   
@@ -36,7 +36,7 @@ selectK = function(X = data.matrix) {
 }
 
 ## method: Randomized Sparse PCA
-applyRSPCA = function(X = data.matrix, k = k) {
+applyRSPCA = function(X, k) {
   # generating output
   output = rspca(X, k = k)
   
@@ -52,7 +52,7 @@ applySPCA = function(X, k) {
 }
 
 ## method: Non Linear PCA
-applyNLPCA = function(X = data.matrix, k = k) {
+applyNLPCA = function(X, k) {
   output = nlpca(X, nPcs = k, maxSteps = 1000)
   return(list(loadings = 0, scores = output@scores))
 }

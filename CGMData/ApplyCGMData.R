@@ -1,4 +1,13 @@
-# applying methods to data
+#### 
+
+# Megan Tung
+# This script calls PCA methods in Methods.R in application to CGM data and extracts 
+# resulting scores and loadings matrices to identify features included in each 
+# principal component. Script visualizes variance captured by first two PCs of each
+# PCA method
+
+####
+
 
 # load real data
 load("CGMData/Data/CGMvisit1metrics_masked.Rda")
@@ -99,10 +108,12 @@ resultsCGM = list(rank = khat,
                         featuresRSVD = featuresRSVD)
 
 
+
+
 ### figures for PCs 1 & 2 ###
 
 # unnecessary
-# load("~/PCATeamSpring22/CGMData/Outputs/resultsCGM.Rdata")
+# load("/CGMData/Outputs/resultsCGM.Rdata")
 
 # set palette
 # brown, dark blue, med blue, light blue, red

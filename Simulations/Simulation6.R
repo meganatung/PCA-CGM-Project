@@ -1,4 +1,13 @@
-#### Simulation Setting 6
+#### 
+
+# Megan Tung
+# Simulation Setting 6
+# k = 3, s = 10, sd = 0.1
+
+# File generates data with the above parameters, applies PCA methods to data,
+# evaluates error on resulting matrices and rank
+
+####
 
 # source all functions
 source("Functions/Metrics.R")
@@ -29,16 +38,18 @@ start = proc.time()
 set.seed(489)
 
 # perform replications
-results = foreach(i = 1:nrep, .packages = c("nFactors", "sparsepca", "pcaMethods", "ltsspca")) %dorng% {
-  
+results = foreach(
+  i = 1:nrep,
+  .packages = c("nFactors", "sparsepca", "pcaMethods", "ltsspca")
+) %dorng% {
   # data generation
-  data = generateSettings(k = 3, s =10, error.sd = 0.1)
+  data = generateSettings(k = 3, s = 10, error.sd = 0.1)
   
   # get true values and data matrix X
-  X.data = data[[1]]
+  X = data[[1]]
   
   # center and scale data
-  mod.X.data = scale(X.data, center = TRUE, scale = TRUE)
+  csX = scale(X, center = TRUE, scale = TRUE)
   
   # trueK from generated settings
   trueK = 3
@@ -48,13 +59,13 @@ results = foreach(i = 1:nrep, .packages = c("nFactors", "sparsepca", "pcaMethods
   trueLoadings = data[[3]]
   
   # apply methods
-  estK = selectK(mod.X.data)
+  estK = selectK(csX)
   
   # evaluate accuracy of k
   evalK = testK(k = trueK, khat = estK)
   
-  ### rspca 
-  outRSPCA = applyRSPCA(X = mod.X.data, k = 3)
+  ### rspca
+  outRSPCA = applyRSPCA(X = csX, k = 3)
   
   # metrics for rspca
   rspcaCD = testChordalDist(V = trueLoadings, Vhat = outRSPCA[[1]])
@@ -67,7 +78,7 @@ results = foreach(i = 1:nrep, .packages = c("nFactors", "sparsepca", "pcaMethods
   rspcaScores = testScores(scores = trueScores, scoreshat = outRSPCA[[2]])
   
   ### spca
-  outSPCA = applySPCA(X = mod.X.data, k = 3)
+  outSPCA = applySPCA(X = csX, k = 3)
   
   # metrics for spca
   spcaCD = testChordalDist(V = trueLoadings, Vhat = outSPCA[[1]])
@@ -80,13 +91,13 @@ results = foreach(i = 1:nrep, .packages = c("nFactors", "sparsepca", "pcaMethods
   spcaScores = testScores(scores = trueScores, scoreshat = outSPCA[[2]])
   
   ### nlpca
-  outNLPCA = applyNLPCA(X = mod.X.data, k = 3)
+  outNLPCA = applyNLPCA(X = csX, k = 3)
   nlpcaScores = testScores(scores = trueScores, scoreshat = outNLPCA[[2]])
   
-  ### spca_rsvd
-  outRSVD = applyRSVD(X = mod.X.data, k = 3)
+  ### spca rsvd
+  outRSVD = applyRSVD(X = csX, k = 3)
   
-  # metrics for spca_rsvd
+  # metrics for spca rsvd
   rsvdCD = testChordalDist(V = trueLoadings, Vhat = outRSVD[[1]])
   rsvdUDV = testUDV(
     loadings = trueLoadings,
@@ -113,5 +124,5 @@ print(proc.time() - start)
 stopCluster(cl)
 
 # save resulting result as output of simulation
-filename.rdata = paste0("Simulations/Outputs/sim_setting6_resultsv2", nrep,".Rdata")
+filename.rdata = paste0("Simulations/Outputs/sim_setting6_resultsv2", nrep, ".Rdata")
 save(results, file = filename.rdata)

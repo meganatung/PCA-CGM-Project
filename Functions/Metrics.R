@@ -1,3 +1,12 @@
+####
+
+# Megan Tung
+# File contains helper functions to calculate metrics to evaluate accuracy of 
+# PCA methods on simulated and real data and output results in usable format
+
+####
+
+
 testK = function(k, khat) {
   # compare accuracy of k and khat
   
