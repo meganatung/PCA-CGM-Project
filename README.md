@@ -15,7 +15,7 @@ The files contained in this repository are limited compared to the original proj
 
 The two executable files to run are Simulation6.R and ApplyCGMData.R, which both call functions written in the Methods.R and Metrics.R files. Simulation6.R also calls functions written in the DataGeneration.R folder. It is recommended to change nrep = 1 in Simulation6.R to not overwhelm the computer for testing purposes.
 
--**install_packages.R**: file meant to be run once on a new machine to install necessary packages.
+ - **install_packages.R**: file meant to be run once on a new machine to install necessary packages.
 
  - **CGMData**: *Data* folder contains data, *Figures* folder is used to store figures (pdf outputs), *Outputs* folder is used to store intermediate outputs as needed (.Rda files). Clean data analysis scripts representing final application of methods on the data are stored as .R files directly within CGMData folder
  
