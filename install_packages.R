@@ -6,7 +6,10 @@ install.packages(c("BiocManager",
                    "nFactors",
                    "doParallel",
                    "doRNG",
-                   "foreach"))
+                   "foreach",
+                   "ggplot2",
+                   "dplyr"
+                   ))
 
 if(!require("BiocManager", quietly=TRUE))
   install.packages("BiocManager")

@@ -7,6 +7,7 @@ This repository contains files from a project that was completed as part of a sp
 
 The dataset being used for this project contains summary statistics, or metrics, drawn from Continuous Glucose Monitor (CGM) data. Some of the metrics in the CGM data are highly related, or correlated (e.g. range and interquartile range, percent of data above 140 mg/dL, above 180 mg/dL, and above 250 mg/dL), which can make interpreting the original data difficult and time consuming. Applying PCA would reduce the number of features while retaining most of the variability from the original data. In particular, applying sparse PCA methods would take only the most correlated subset of original features to build the principal components, or "super-features", to make the data even more interpretable.
 The goal of the project is to compare existing PCA methods performance in simulations to examine behavior under different settings of amount of error, rank of signal matrix, and sparsity. Then we apply the methods to the CGM data and determine if the methods were effective in reducing dimensionality and creating "superfeatures".
+Since the completion of this project, one package supporting the nlpca function has not been updated for the current version of R, so Rcode utilizing this has been commented out.
 
 ## Notes on file/folder organization:
 

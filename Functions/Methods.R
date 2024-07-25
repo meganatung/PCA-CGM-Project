@@ -12,7 +12,7 @@ library(nFactors)
 library(sparsepca)
 library(ltsspca)
 library(BiocManager)
-library(pcaMethods)
+#library(pcaMethods) # no longer available
 
 ## method: nBartlett
 selectK = function(X) {

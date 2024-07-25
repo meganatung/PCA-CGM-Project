@@ -14,12 +14,6 @@ source("Functions/Metrics.R")
 source("Functions/Methods.R")
 source("Functions/DataGeneration.R")
 
-# install required packages
-library(pcaMethods) # nlpca
-library(ltsspca) # sPCA_rSVD
-library(sparsepca) # spca and rspca
-library(nFactors) # nBartlett
-
 # number of reps per model
 nrep = 100
 
