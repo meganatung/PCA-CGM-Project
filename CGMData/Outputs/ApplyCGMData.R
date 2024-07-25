@@ -23,7 +23,7 @@ ind = which(is.na(X), arr.ind = TRUE)
 X[ind] = mean(X[, ind[2]], na.rm = TRUE)
 
 # Remove the id column
-X = X[,-1]
+X = X[, -1]
 
 # center and scale data
 X = scale(X, center = TRUE, scale = TRUE)
@@ -102,13 +102,10 @@ resultsCGM = list(
   featuresRSVD = featuresRSVD
 )
 
-
+save(resultsCGM, file = "CGMData/Outputs/resultsCGM.Rdata")
 
 
 ### figures for PCs 1 & 2 ###
-
-# unnecessary
-# load("/CGMData/Outputs/resultsCGM.Rdata")
 
 # set palette
 # brown, dark blue, med blue, light blue, red
@@ -136,7 +133,7 @@ plotSPCA = ggplot(data = scoresSPCA, aes(x = scoresSPCA[, 1], y = scoresSPCA[, 2
   ylim(c(-15, 15)) +
   ggtitle("SPCA Principal Components 1,2") +
   xlab("PC1") + ylab("PC2")
-print(plotSPCA)
+#print(plotSPCA)
 #pdf(file = paste("CGMData/Figures/spca_pc_fig.pdf"),width = 9, height = 7)
 #dev.off()
 
@@ -161,7 +158,6 @@ plotRSVD = ggplot(data = scoresRSVD, aes(x = scoresRSVD[, 1], y = scoresRSVD[, 2
   ylim(c(-15, 15)) +
   ggtitle("SPCA RSVD Principal Components 1,2") +
   xlab("PC1") + ylab("PC2")
-print(plotRSVD)
+#print(plotRSVD)
 #pdf(file = paste("CGMData/Figures/spcarsvd_pc_fig.pdf"),width = 9, height = 7)
 #dev.off()
-

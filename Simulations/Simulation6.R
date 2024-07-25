@@ -15,7 +15,7 @@ source("Functions/Methods.R")
 source("Functions/DataGeneration.R")
 
 # number of reps per model
-nrep = 100
+nrep = 1
 
 # cluster initialization
 library(doParallel)
@@ -34,10 +34,10 @@ set.seed(489)
 # perform replications
 results = foreach(
   i = 1:nrep,
-  .packages = c("nFactors", "sparsepca", "pcaMethods", "ltsspca")
+  .packages = c("nFactors", "sparsepca", "ltsspca")
 ) %dorng% {
   # data generation
-  data = generateSettings(k = 3, s = 10, error.sd = 0.1)
+  data = generateSettings(k = 3, s = 10, errorSD = 0.1)
   
   # get true values and data matrix X
   X = data[[1]]
@@ -85,8 +85,8 @@ results = foreach(
   spcaScores = testScores(scores = trueScores, scoreshat = outSPCA[[2]])
   
   ### nlpca
-  outNLPCA = applyNLPCA(X = csX, k = 3)
-  nlpcaScores = testScores(scores = trueScores, scoreshat = outNLPCA[[2]])
+  #outNLPCA = applyNLPCA(X = csX, k = 3)
+  #nlpcaScores = testScores(scores = trueScores, scoreshat = outNLPCA[[2]])
   
   ### spca rsvd
   outRSVD = applyRSVD(X = csX, k = 3)
@@ -107,7 +107,7 @@ results = foreach(
     metricK = evalK,
     metricV = c(rspcaCD, spcaCD, rsvdCD),
     metricUDV = c(rspcaUDV, spcaUDV, rsvdUDV),
-    metricScores = c(rspcaScores, spcaScores, nlpcaScores, rsvdScores)
+    metricScores = c(rspcaScores, spcaScores, rsvdScores)
   )
 }
 
